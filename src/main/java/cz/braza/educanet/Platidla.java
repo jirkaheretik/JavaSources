@@ -1,5 +1,6 @@
 package cz.braza.educanet;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class Platidla {
@@ -60,11 +61,14 @@ public class Platidla {
         }
     }
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in, "utf8");
+        Scanner sc = new Scanner(System.in, StandardCharsets.UTF_8);
         while(true) {
             System.out.println("Nový běh, inicializace\n======================\n");
-            System.out.println("Zadejte částky k dispozici, od největší, oddělené středníkem:");
-            nactiVstup(sc.nextLine().trim());
+            System.out.println("Zadejte částky k dispozici, od největší, oddělené středníkem [konec pro ukončení]:");
+            String vstup = sc.nextLine().trim();
+            if ("konec".equals(vstup))
+                break;
+            nactiVstup(vstup);
             System.out.println("Zadejte maximální počet od jedné hodnoty [10]:");
             try {
                 maxPocet = Integer.parseInt(sc.nextLine().trim());
