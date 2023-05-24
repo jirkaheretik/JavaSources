@@ -4,7 +4,7 @@ public class CislaNaText {
     public static String[] RADY2 = { "", " tisíce ", " miliony ", " miliardy "};
     public static String[] RADY5 = { "", " tisíc ", " milionů ", " miliard "};
     public static String[] JEDNICKY = {"jeden", "jedna", "jedno"};
-    public static String[] JEDNOTKY1 = {"", "jeden", "dva", "tři", "čtyři", "pět", "šest", "sedm", "osm", "devět"};
+    public static String[] JEDNOTKY1 = {"", "jeden", "dva", "tři", "čtyři", "pět", "šest", "sedm", "osm", "devět", "deset", "jedenáct", "dvanáct", "třináct", "čtrnáct", "patnáct", "šestnáct", "sedmnáct", "osmnáct", "devatenáct"};
     public static String[] JEDNOTKY1F = {"", "", "dvě", "tři", "čtyři", "pět", "šest", "sedm", "osm", "devět"};
     public static String[] DESITKY = {"", "deset", "dvacet", "třicet", "čtyřicet", "padesát", "šedesát", "sedmdesát", "osmdesát", "devadesát"};
     public static String[] STOVKY = {"", "sto", "stě", "sta", "sta", "set", "set", "set", "set", "set"};
@@ -35,7 +35,7 @@ public class CislaNaText {
         return result;
     }
     public static void main(String[] args) {
-        System.out.println(intToCzech(327));
+        System.out.println(intToCzech(314));
         System.out.println(intToCzech(2040924666));
         System.out.println(intToCzech(1327));
         System.out.println(intToCzech(301327));
