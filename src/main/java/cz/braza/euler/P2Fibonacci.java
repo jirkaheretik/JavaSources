@@ -8,12 +8,11 @@ public class P2Fibonacci {
 
     public static void main(String[] args) {
         // sum of even fibonacci numbers up to 4M
-        boolean goOn = true;
-        while (goOn) {
+        while (true) {
             int val = calcNextFibo();
             if (val > 4000000)
-                goOn = false;
-            else if (val  % 2 == 0)
+                break;
+            if (val  % 2 == 0)
                 sumOfEvens += val;
         }
         System.out.println("Sum of even Fibonacci numbers up to 4M is " + sumOfEvens);
