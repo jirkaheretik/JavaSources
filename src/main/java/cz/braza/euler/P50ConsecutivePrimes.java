@@ -18,8 +18,7 @@ public class P50ConsecutivePrimes {
             int index = i;
             int sum = prvocisla[index];
             int count = 1;
-            boolean jedeme = true;
-            while (jedeme && index < prvocisla.length - 1) {
+            while (index < prvocisla.length - 1) {
                 sum += prvocisla[++index];
                 count++;
                 if (sum > MAX)

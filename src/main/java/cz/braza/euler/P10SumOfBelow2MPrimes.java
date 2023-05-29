@@ -7,10 +7,9 @@ public class P10SumOfBelow2MPrimes {
         int MAX = 2000000;
         Eratosthenes2 sito = new Eratosthenes2(MAX + 1000);
         long sum = 0;
-        int cislo = sito.nextPrime();
-        while (cislo < MAX) {
+        int cislo;
+        while ((cislo = sito.nextPrime()) < MAX) {
             sum += cislo;
-            cislo = sito.nextPrime();
         }
         System.out.println("Sum of sub2M primes is " + sum);
     }
