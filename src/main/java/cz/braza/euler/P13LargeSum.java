@@ -1,5 +1,7 @@
 package cz.braza.euler;
 
+import java.math.BigInteger;
+
 /**
  * Sum of hundred 50digits numbers, or at least first ten digits of it
  */
@@ -129,10 +131,21 @@ public class P13LargeSum {
         return result;
     }
 
+    public static String addBigNumbers(String[] arr) {
+        BigInteger result = BigInteger.ZERO;
+        for (String num : arr) {
+            result = result.add(new BigInteger(num));
+        }
+        return result.toString(10);
+    }
+
     public static void main(String[] args) {
         String result = addStrings(numbers[0], numbers[1]);
         for (int i = 2; i < numbers.length; i++)
             result = addStrings(result, numbers[i]);
+        System.out.println("Total result: " + result);
+        System.out.println("First 10 digits: " + result.substring(0, 10));
+        result = addBigNumbers(numbers);
         System.out.println("Total result: " + result);
         System.out.println("First 10 digits: " + result.substring(0, 10));
     }

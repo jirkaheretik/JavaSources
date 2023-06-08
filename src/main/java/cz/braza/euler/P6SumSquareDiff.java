@@ -14,7 +14,7 @@ public class P6SumSquareDiff {
     }
     public static void main(String[] args) {
         int value = 100;
-        int square = sumUpToN(100);
+        int square = sumUpToN(value);
         System.out.println(square*square - sumOfSquares(value));
 
     }
