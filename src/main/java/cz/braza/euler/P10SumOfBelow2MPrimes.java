@@ -1,11 +1,11 @@
 package cz.braza.euler;
 
-import cz.braza.Eratosthenes2;
+import cz.braza.EratosthenesSieve;
 
 public class P10SumOfBelow2MPrimes {
     public static void main(String[] args) {
-        int MAX = 314;
-        Eratosthenes2 sito = new Eratosthenes2(MAX + 1000);
+        int MAX = 2000000;
+        EratosthenesSieve sito = new EratosthenesSieve(MAX + 1000);
         long sum = 0;
         int cislo;
         while ((cislo = sito.nextPrime()) < MAX) {

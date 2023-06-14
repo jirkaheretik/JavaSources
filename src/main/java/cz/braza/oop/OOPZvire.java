@@ -1,4 +1,5 @@
 package cz.braza.oop;
+
 class Zvire {
     protected int vaha;
     public Zvire(int vaha) { this.vaha = vaha; }

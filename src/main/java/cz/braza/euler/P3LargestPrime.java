@@ -1,6 +1,6 @@
 package cz.braza.euler;
 
-import cz.braza.Eratosthenes2;
+import cz.braza.EratosthenesSieve;
 
 /**
  * Project Euler 3 - find the largest prime dividing 600851475143
@@ -15,7 +15,7 @@ public class P3LargestPrime {
     public static void main(String[] args) {
         long vstup = 600851475143L;
         int max = 0;
-        Eratosthenes2 sito = new Eratosthenes2(1000000);
+        EratosthenesSieve sito = new EratosthenesSieve(1000000);
         while (vstup > max) {
             int prime = sito.nextPrime();
             if (vstup % prime == 0) {

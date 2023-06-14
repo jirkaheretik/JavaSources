@@ -1,11 +1,11 @@
 package cz.braza.euler;
 
-import cz.braza.Eratosthenes2;
+import cz.braza.EratosthenesSieve;
 
 public class P50ConsecutivePrimes {
     public static final int MAX = 1000000;
     public static void main(String[] args) {
-        Eratosthenes2 sito = new Eratosthenes2(MAX);
+        EratosthenesSieve sito = new EratosthenesSieve(MAX);
         // naplnit pole prvocisel:
         int pocetCisel = sito.countPrimes();
         int[] prvocisla = new int[pocetCisel];

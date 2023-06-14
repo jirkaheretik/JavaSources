@@ -1,10 +1,10 @@
 package cz.braza.euler;
 
-import cz.braza.Eratosthenes2;
+import cz.braza.EratosthenesSieve;
 
 public class P7Prime10k1 {
     public static void main(String[] args) {
-        Eratosthenes2 sito = new Eratosthenes2(1000000);
+        EratosthenesSieve sito = new EratosthenesSieve(1000000);
         if (sito.countPrimes() <10002)
             System.out.println("Málo :-(");
         int cislo = 0;

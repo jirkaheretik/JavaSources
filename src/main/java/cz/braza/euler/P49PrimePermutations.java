@@ -1,9 +1,8 @@
 package cz.braza.euler;
 
-import cz.braza.Eratosthenes2;
+import cz.braza.EratosthenesSieve;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.TreeSet;
 
 /**
@@ -22,7 +21,7 @@ public class P49PrimePermutations {
         return true;
     }
     public static void main(String[] args) {
-        Eratosthenes2 sito = new Eratosthenes2(10000);
+        EratosthenesSieve sito = new EratosthenesSieve(10000);
 
         // testovani isRising:
         /*
@@ -54,7 +53,7 @@ public class P49PrimePermutations {
         // 2699 (270) 2969 (3330) 6299 (3330) 9629 ==> 296962999629 je hledany vysledek!
     }
 
-    private static int[] makePermutationsOfPrimes(int cislo, Eratosthenes2 sito) {
+    private static int[] makePermutationsOfPrimes(int cislo, EratosthenesSieve sito) {
         int i = cislo % 10;
         cislo /= 10;
         int j = cislo % 10;

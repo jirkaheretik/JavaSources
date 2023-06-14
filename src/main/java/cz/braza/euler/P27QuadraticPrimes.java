@@ -1,6 +1,6 @@
 package cz.braza.euler;
 
-import cz.braza.Eratosthenes2;
+import cz.braza.EratosthenesSieve;
 
 /**
  * Find A and B (abs(a) <= 1000, abs(b) <= 1000) so that
@@ -8,7 +8,7 @@ import cz.braza.Eratosthenes2;
  */
 public class P27QuadraticPrimes {
     public static void main(String[] args) {
-        Eratosthenes2 sito = new Eratosthenes2(1234567);
+        EratosthenesSieve sito = new EratosthenesSieve(1234567);
         int maxN = 0;
         int product = 0;
         for (int a = -999; a < 1000; a++)

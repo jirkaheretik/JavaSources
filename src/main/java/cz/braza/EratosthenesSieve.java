@@ -1,18 +1,16 @@
 package cz.braza;
 
-import java.util.Scanner;
-
 /**
  * Object oriented Eratosthenes net - gets a number as a parameter in a constructor,
  * runs the algorithm, then can return results
  */
-public class Eratosthenes2 {
+public class EratosthenesSieve {
     private int STROP = 2000000;
     private boolean[] SITO;
 
     private int lastIndex = 0;
 
-    public Eratosthenes2(int strop) {
+    public EratosthenesSieve(int strop) {
         STROP = strop;
         SITO = new boolean[STROP + 1];
         prosevej();
@@ -66,7 +64,7 @@ public class Eratosthenes2 {
     public static void main(String[] args) {
         int limit = 20000000;
         System.out.println("Spoustim Eratosthenovo sito...");
-        Eratosthenes2 sito = new Eratosthenes2(limit);
+        EratosthenesSieve sito = new EratosthenesSieve(limit);
         System.out.println("Sito dokonceno, muzeme testovat.");
         System.out.println("Existuje " + sito.countPrimes() + " prvocisel do " + limit);
         System.out.println("First five primes:");
