@@ -6,9 +6,7 @@ enum TypCisla {
     public String toString() {
         return this.name();
     }
-}
-public class P112BouncyNumbers {
-    public static TypCisla coJeZac(int cislo) {
+    public static TypCisla getType(int cislo) {
         boolean increasing = true;
         boolean decreasing = true;
         int last = -1;
@@ -26,13 +24,14 @@ public class P112BouncyNumbers {
         else
             return decreasing ? TypCisla.Decreasing : TypCisla.Bouncy;
     }
-
+}
+public class P112BouncyNumbers {
     public static void main(String[] args) {
         // test fce coJeZac():
-        System.out.println(coJeZac(112567));
-        System.out.println(coJeZac(222222222));
-        System.out.println(coJeZac(1587454587));
-        System.out.println(coJeZac(94310));
+        System.out.println(TypCisla.getType(112567));
+        System.out.println(TypCisla.getType(222222222));
+        System.out.println(TypCisla.getType(1587454587));
+        System.out.println(TypCisla.getType(94310));
 
         // main fce
         int bouncy = 0;
@@ -40,7 +39,7 @@ public class P112BouncyNumbers {
         int[] marks = { 538, 1000, 21780};
 
         for (int i = 1; i < Integer.MAX_VALUE; i++) {
-            if (coJeZac(i) == TypCisla.Bouncy)
+            if (TypCisla.getType(i) == TypCisla.Bouncy)
                 bouncy++;
             else
                 other++;
