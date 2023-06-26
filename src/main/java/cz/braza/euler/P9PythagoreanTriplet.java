@@ -6,6 +6,16 @@ package cz.braza.euler;
  * Then return a*b*c
  */
 public class P9PythagoreanTriplet {
+
+    public static void findSolution(final int obvod) {
+        for (int a = 1; a < obvod; a++)
+            for (int b = a + 1; b < obvod; b++) {
+                int c = obvod - a - b;
+                if (a + b <= c) continue;
+                if (a*a + b*b == c*c)
+                    System.out.println("Found triplet (" + a + ", " + b + ", " + c + ") with a product of " + (a*b*c));
+            }
+    }
     public static void main(String[] args) {
         for (int a = 1; a < 998; a++)
             for (int b = a + 1; b < 999; b++)
@@ -18,5 +28,7 @@ public class P9PythagoreanTriplet {
                         if (a+b+c == 1000)
                             System.out.println("Found triplet (" + a + ", " + b + ", " + c + ") with a product of " + (a*b*c));
                 }
+        findSolution(1000);
+        findSolution(840);
     }
 }
