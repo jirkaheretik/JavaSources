@@ -17,8 +17,7 @@ public class P34DigitFactorials {
     public static void main(String[] args) {
         // fill in FACTS:
         FACTS[0] = 1;
-        FACTS[1] = 1;
-        for (int i = 2; i < 10; i++)
+        for (int i = 1; i < 10; i++)
             FACTS[i] = i * FACTS[i - 1];
         System.out.println(FACTS[9]);
         // now the calculation:
