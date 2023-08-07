@@ -34,18 +34,46 @@ public class Skoleni {
 
 //         template();
 //         kalkulacka();
-//        retezceUkol();
+        retezceUkol();
 //        podminky();
         //nasobilka();
         //sachovnice();
         //pole();
 
         // pokus - pretty print pole:
-        System.out.printf("[%s]\n", String.join(", ", DNY));
-
+//        System.out.printf("[%s]\n", String.join(", ", DNY));
+//        System.out.println("Pokus");
         //denVTydnu(4);
         //System.out.println(prumer("13456,476576,67000, 50006, 12000, 12455"));
+        /*
+        String[] predmety = {"jablko", "nůž"};
+        System.out.println(predmety[1]);
+        predmety[1] = "rajče";
+        System.out.println(predmety[1]);
 
+        String[] predmetyDalsi = { "jablko", "rajče", "sekera"};
+        //System.out.println(predmety[2]); // BOUCHNE!
+        predmety = predmetyDalsi;
+        System.out.println(predmety[2]); // sekera
+        predmetyDalsi[2] = "tabule";
+        System.out.println(predmety[2]); // ???
+
+
+        dejMiDenVTydnu(4);*/
+
+
+        System.out.println(faktorial(8));
+    }
+
+    private static int faktorial(int i) {
+        int faktorial = 1;
+        for (int n = 2; n <= i; n++)
+            faktorial *= n;
+        return faktorial;
+    }
+
+    private static void dejMiDenVTydnu(int i) {
+        System.out.println(DNY[i % DNY.length]);
     }
 
     private static void denVTydnu(int den) {
@@ -105,10 +133,13 @@ public class Skoleni {
     }
 
     private static void retezceUkol() {
-        String vstup = " C++ je %d KRÁT lepší! ";
-        String vystup = vstup.trim().toLowerCase().replace("c++", "Java");
+        String vystup = " C++ je %d KRÁT lepší! ".trim().toLowerCase().replace("c++", "Java");
         System.out.println(vystup.startsWith("Java"));
         System.out.println(vystup.contains("krát"));
         System.out.printf(vystup, vystup.length() * 3);
+    }
+
+    public static void novaFunkce() {
+        System.out.println("Pokus");
     }
 }
