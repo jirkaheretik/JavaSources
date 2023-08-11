@@ -2,9 +2,9 @@ package cz.braza.euler;
 
 import java.math.BigInteger;
 
-public class P16PowerDigitSum {
+public class P20FactorialSum {
     /**
-     * Python: sum(map(int, str(2**1000)))
+     * Python: sum(map(int, str(fact(100))))
      */
 
     static int findSum(String str)
@@ -18,11 +18,19 @@ public class P16PowerDigitSum {
         }
         return sum;
     }
+
+    static BigInteger fact(int n) {
+        BigInteger result = BigInteger.ONE;
+        for (int i = 2; i <= n; i++)
+            result = result.multiply(BigInteger.valueOf(i));
+        return result;
+    }
+
     public static void main(String[] args) {
-        BigInteger velkeCislo = BigInteger.TWO.pow(1000);
-        String velkyRetezec = velkeCislo.toString();
+        BigInteger f100 = fact(100);
+        String velkyRetezec = f100.toString();
+        System.out.println(f100);
         System.out.println("Počet míst: " + velkyRetezec.length());
-        System.out.println(velkeCislo);
         System.out.println(findSum(velkyRetezec));
     }
 }
