@@ -1,6 +1,6 @@
 package cz.braza.educanet;
 
-final class Frac {
+final public class Frac {
     private final int citatel;
     private final int jmenovatel;
     private int nsd(int a, int b) {
