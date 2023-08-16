@@ -2,7 +2,7 @@ package cz.braza.euler;
 
 import java.math.BigInteger;
 
-public class F25Fibonacci1000Digits {
+public class P25Fibonacci1000Digits {
     public static void main(String[] args) {
         int index = 12;
         BigInteger f1 = BigInteger.valueOf(89);
