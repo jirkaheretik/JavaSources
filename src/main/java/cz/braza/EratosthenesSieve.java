@@ -61,6 +61,14 @@ public class EratosthenesSieve {
         return lastIndex++;
     }
 
+    public boolean hasNext() {
+        for (int i = lastIndex; i <= STROP; i++) {
+            if (!SITO[i])
+                return true;
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         int limit = 20000000;
         System.out.println("Spoustim Eratosthenovo sito...");
