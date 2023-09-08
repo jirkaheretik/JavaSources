@@ -26,6 +26,7 @@ public class P40Champernowne {
         while (sb.length() < 1000000) {
             sb.append(num++);
         }
+        System.out.println("Last number needed: " + num);
         int product = 1;
         for (int mark: marks) {
             char c = sb.charAt(mark-1);

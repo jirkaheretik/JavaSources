@@ -25,7 +25,7 @@ public class P18MaxPathSum {
         BufferedReader br;
         try {
             // Filenames: P18test.txt, P18.txt, P67.txt
-            InputStreamReader streamReader = new InputStreamReader(Thread.currentThread().getContextClassLoader().getResourceAsStream("P67.txt"), StandardCharsets.UTF_8);
+            InputStreamReader streamReader = new InputStreamReader(Thread.currentThread().getContextClassLoader().getResourceAsStream("P18.txt"), StandardCharsets.UTF_8);
             br = new BufferedReader(streamReader);
         String strLine;
         int[] predchoziRadek = {0};
