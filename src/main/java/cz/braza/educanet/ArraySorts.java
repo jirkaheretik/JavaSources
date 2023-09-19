@@ -16,15 +16,11 @@ public class ArraySorts {
             goAgain = false;
             for (int i = 0; i < pole.length - 1; i++) {
                 if (pole[i] > pole[i + 1]) {
-                    int dummy = pole[i];
-                    pole[i] = pole[i + 1];
-                    pole[i + 1] = dummy;
+                    swap(pole, i, i + 1);
                     goAgain = true;
                 }
             }
         }
-        // array is sorted:
-        prettyPrint(pole);
     }
 
     public static void selectionSort(int[] pole) {
@@ -38,21 +34,15 @@ public class ArraySorts {
                     lowest = i;
                 }
             // 2. swap with position <sorted>
-            if (lowest != sorted) {
-                int dummy = pole[lowest];
-                pole[lowest] = pole[sorted];
-                pole[sorted] = dummy;
-            }
+            if (lowest != sorted)
+                swap(pole, lowest, sorted);
             // 3. increase sorted by one
             sorted++;
         }
-        prettyPrint(pole);
     }
 
     public static void quickSort(int[] pole) {
         quickSort(pole, 0, pole.length - 1);
-        // array is sorted:
-        prettyPrint(pole);
     }
 
     /**
@@ -70,7 +60,6 @@ public class ArraySorts {
     private static void quickSort(int[] pole, int low, int high) {
         if (low < high) {
             int pivot = qsPartition(pole, low, high);
-
             quickSort(pole, low, pivot - 1);
             quickSort(pole, pivot + 1, high);
         }
@@ -106,7 +95,11 @@ public class ArraySorts {
     }
     public static void main(String[] args) {
         int[] mojePole = {2, 5, 87, 14, 11, 0, 99, 42, 5, 7, 9, 64, 46, 24, 30, 28, 1, 9, 8, 4};
-        quickSort(mojePole);
+        //quickSort(mojePole);
+        //bubbleSort(mojePole);
+        selectionSort(mojePole);
+        // array is sorted:
+        prettyPrint(mojePole);
 
     }
 }
