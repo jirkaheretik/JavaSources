@@ -13,13 +13,16 @@ class Clovicek {
         vek = age;
         Clovicek.prictiJednoho();
     }
+
+    public Clovicek() {
+        this("Neznámý", 0);
+    }
     public void skamaradit(String kamos) { kamarad = kamos;}
 
 
     public String toString() {
         return "Ahoj, já jsem " + jmeno + ", je mi " + vek + " let a můj kamarád je " + kamarad;
     }
-
     @Override
     public boolean equals(Object other) {
         if (other instanceof  Clovicek) {
@@ -36,11 +39,11 @@ class NakladniAuto {
     public static final int NOSNOST = 3000;
     private int naklad = 0;
     public void naloz(int hmotnost) {
-        if (hmotnost > 0 && hmotnost + naklad <= NOSNOST)
+        if (hmotnost >= 0 && hmotnost + naklad <= NOSNOST)
             naklad += hmotnost;
     }
     public void vyloz(int hmotnost) {
-        if (hmotnost > 0 && hmotnost <= naklad)
+        if (hmotnost >= 0 && hmotnost <= naklad)
             naklad -= hmotnost;
     }
 
@@ -59,7 +62,11 @@ class Kalkulacka {
     public double secti() { return prvni + druhe; }
     public double odecti() { return prvni - druhe; }
     public double vynasob() { return prvni * druhe; }
-    public double vydel() { return prvni / druhe; }
+    public double vydel() {
+        if (druhe == 0)
+            throw new ArithmeticException("Nulou dělit nelze!");
+        return prvni / druhe;
+    }
 
     /**
      * Později přidaná metoda pro celočíselné dělení, zejména pro ilustraci
@@ -92,8 +99,13 @@ class Zviratko {
         if (jidlo > 0) vaha += jidlo;
     }
 
+    @Override
+    public String toString() {
+        return "Vážím " + vaha + " kg a " + (leta()? "létám": "nelétám" ) ;
+    }
+
     public void vypis() {
-        System.out.println("Vážím " + vaha + " a " + (leta()? "létám": "nelétám" ) );
+        System.out.println(this);
     }
 
 }
@@ -115,9 +127,11 @@ public class Oop2 {
 
         /* ** OOP Mid - Nakladni auto
         NakladniAuto auto = new NakladniAuto();
-        auto.naloz(-10000);
+        auto.naloz(-20000);
+        auto.vyloz(6000);
         auto.naloz(500);
         auto.vyloz(300);
+        auto.naloz(5000);
         auto.vyloz(1000);
         System.out.println(auto);
          */
@@ -132,13 +146,37 @@ public class Oop2 {
         System.out.println(karel);
         System.out.println(cyril);
 */
-
+/*
         Clovicek karel = new Clovicek("Karel", 42);
         //System.out.println(karel);
         Clovicek inst2 = new Clovicek("Karel", 42);
-        // System.out.println(karel.equals(inst2));
-        karel = new Clovicek("Josef", 39);
-        karel = new Clovicek("Josef", 39);
-        System.out.println(Clovicek.getPocetLidi());
+        System.out.println(karel == inst2);
+        System.out.println(karel.equals(inst2));
+        System.out.println(inst2.equals(inst2));
+        //karel = new Clovicek("Josef", 39);
+        //karel = new Clovicek("Josef", 39);
+*/
+        //System.out.println(Clovicek.getPocetLidi());
+
+
+/*
+        double a = 42;
+        double b = 0;
+        System.out.println(a / b);
+
+ */
+
+        /* OOP Zviratko */
+        //Zviratko vrana = new Zviratko(5);
+        //vrana.vypis();
+        //vrana.nakrm(4);
+        //vrana.vypis();
+
+        //System.out.println(vrana);
+
+        Kalkulacka k = new Kalkulacka(-15, 0);
+        System.out.println(k.vydel());
+        System.out.println(Kalkulacka.vydelCelociselne(15, 5));
+        System.out.println(Kalkulacka.vydelCelociselne(15, 0));
     }
 }

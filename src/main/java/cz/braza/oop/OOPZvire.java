@@ -1,10 +1,30 @@
 package cz.braza.oop;
 
-class Zvire {
+enum Barva { CERVENA, MODRA, FIALOVA }
+
+abstract class Zvire {
     protected int vaha;
     public Zvire(int vaha) { this.vaha = vaha; }
     public boolean leta() { return vaha < 9; }
-    public String vydejZvuk() { return ""; }
+    abstract public String vydejZvuk();
+
+    @Override
+    public boolean equals(Object obj) {
+        System.out.println("Equals ze Zvirete");
+        if (obj instanceof Zvire) {
+            Zvire other = (Zvire) obj;
+            return vaha == other.vaha;
+        } else
+        return super.equals(obj);
+    }
+/*
+    @Override
+    public String toString() {
+        return "Jsem " + getClass().getSimpleName() + ", vážím " + vaha + " kg, " +
+                (leta() ? "" : "ne") + "létám a dělám " + vydejZvuk();
+    }
+
+     */
 }
 
 class Pes extends Zvire {
@@ -19,7 +39,7 @@ class Pes extends Zvire {
 
 }
 
-class Kocka extends Zvire {
+class Kocka extends Zvire implements Cloneable {
     private int pocetZivotu;
     public Kocka(int vaha, int zivoty) {
         super(vaha);
@@ -27,6 +47,16 @@ class Kocka extends Zvire {
     }
     @Override
     public String vydejZvuk() { return "Mňau mňaaauuu. "; }
+
+    @Override
+    public boolean equals(Object obj) {
+        System.out.println("Equals z Kocky");
+        if (obj instanceof Kocka) {
+            Kocka other = (Kocka) obj;
+            return vaha == other.vaha && pocetZivotu == other.pocetZivotu;
+        } else
+            return super.equals(obj);
+    }
 }
 
 public class OOPZvire {
@@ -37,12 +67,27 @@ public class OOPZvire {
         Pes alik = new Pes(22, false);
         zoo[2] = alik;
         zoo[3] = new Kocka(4, 9);
-        Zvire vrana = new Zvire(8);
+        Zvire vrana = new Zvire(8) {
+            @Override
+            public String vydejZvuk() {
+                return "Nic :-)";
+            }
+        };
         zoo[4] = vrana;
 
         for (Zvire zvire: zoo) {
-            zvire.vydejZvuk();
+            System.out.println(zvire.vydejZvuk());
             System.out.println(zvire);
         }
+
+
+        /*
+        Zvire kos = new Zvire(4);
+
+        Zvire micka = new Kocka(4, 7);
+        System.out.println(micka.equals(kos));
+        System.out.println(kos.equals(micka));
+
+         */
     }
 }
