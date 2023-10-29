@@ -49,7 +49,7 @@ public class ArraySorts {
      * Recursive function to sort just a part of the array, given by lower and upper bounds index.
      * It works like this:
      * 0. If length is zero or one, this part is already sorted, return
-     * 1. Picks a pivot (let's say 1st element)
+     * 1. Picks a pivot (let's say last element)
      * 2. Swaps elements so that all smaller elements are now left of the pivot,
      *    while higher elements are right of the pivot
      * 3. now call quickSort() on left and right parts
