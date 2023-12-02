@@ -1,4 +1,4 @@
-package cz.braza;
+package cz.braza.jakub;
 
 import java.util.Arrays;
 

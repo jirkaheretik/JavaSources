@@ -1,4 +1,4 @@
-package cz.braza;
+package cz.braza.jakub;
 public class CislaNaAnglickyText {
     public static String[] RADY = { "", "thousand ", "million ", "billion "};
     public static String[] JEDNOTKY = {"", "one ", "two ", "three ", "four ", "five ", "six ", "seven ", "eight ", "nine ", "ten ", "eleven ", "twelve ", "thirteen ", "fourteen ", "fifteen ", "sixteen ", "seventeen ", "eighteen ", "nineteen "};

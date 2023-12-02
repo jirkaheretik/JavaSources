@@ -1,4 +1,4 @@
-package cz.braza;
+package cz.braza.jakub;
 public class CislaNaText {
     public static String[] RADY1 = { "", "tisíc ", "milion ", "miliarda "};
     public static String[] RADY2 = { "", " tisíce ", " miliony ", " miliardy "};
