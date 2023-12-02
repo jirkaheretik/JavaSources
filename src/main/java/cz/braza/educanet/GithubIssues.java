@@ -13,8 +13,8 @@ public class GithubIssues {
         int languageCount = 0;
         String maxLanguage = "";
         String secondLanguage = "";
-        String year = "2019";
-        String quarter = "2";
+        String year = "2015";
+        String quarter = "1";
         String language = "JavaScript";
         String lang1 = "PHP";
         int issues1 = 0;
