@@ -6,24 +6,25 @@ import java.util.Scanner;
 
 public class AoC202214FallingSand {
     public static int SIZE = 200;
-    public static char[][] POLE = new char[SIZE][SIZE];
-    public static int XMIN = 400;
+    public static char[][] POLE = new char[2 * SIZE][SIZE];
+    public static int XMIN = 300;
     public static int YABYSS = 170;
 
     public static void tiskniPole() {
         System.out.println();
         for (int y = 0; y < SIZE; y++) {
-            for (int x = 0; x < 140; x++)
+            for (int x = 80; x < 220; x++)
                 System.out.print(POLE[x][y]);
             System.out.println();
         }
     }
 
     public static void main(String[] args) throws Exception {
-        for (int i = 0; i < SIZE; i++)
+        for (int i = 0; i < POLE.length; i++)
             Arrays.fill(POLE[i], ' ');
         String fileName = "/home/jirka/src/java0/aoc22_14.txt";
         Scanner vstup = new Scanner(new File(fileName));
+        int ymax = 0;
         while (vstup.hasNextLine()) {
             String line = vstup.nextLine();
             String outLine = "";
@@ -36,6 +37,7 @@ public class AoC202214FallingSand {
                 int x = Integer.parseInt(vals[0]);
                 int y = Integer.parseInt(vals[1]);
                 // System.out.println("DBG. Current coord [" + prevX + "," + prevY + "] moving towards [" + x + "," + y + "]");
+                if (y > ymax) ymax = y;
                 if (prevX > 0 && prevY > 0) {
                     // work towards [x, y]
                     POLE[prevX - XMIN][prevY] = '#';
@@ -55,6 +57,10 @@ public class AoC202214FallingSand {
             }
             // System.out.println("IN : " + line);
             // System.out.println("OUT: " + outLine + "\n");
+            YABYSS = ymax;
+            // end of the world for part two:
+            for (int x = 0; x < POLE.length; x++)
+                POLE[x][YABYSS + 2] = '#';
         }
         POLE[500 - XMIN][0] = '+';
         tiskniPole();

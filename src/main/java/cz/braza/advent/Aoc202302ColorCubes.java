@@ -7,9 +7,7 @@ import java.util.Scanner;
 public class Aoc202302ColorCubes {
     public static final int[] MAX = { 12, 13, 14};
     public static final String[] COLORS = {"red", "green", "blue"};
-    public static final int RED = 0;
-    public static final int GREEN = 1;
-    public static final int BLUE = 2;
+
     public static void main(String[] args) throws Exception {
         String fileName = "/home/jirka/src/java0/aoc23_02.txt";
         Scanner vstup = new Scanner(new File(fileName));

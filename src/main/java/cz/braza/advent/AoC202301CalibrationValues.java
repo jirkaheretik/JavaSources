@@ -1,6 +1,9 @@
 package cz.braza.advent;
 
+import com.google.common.io.Files;
+
 import java.io.File;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class AoC202301CalibrationValues {
@@ -55,6 +58,27 @@ public class AoC202301CalibrationValues {
         }
         return vysledek;
     }
+
+    public static void saySolution() throws Exception {
+        int sum = 0;
+        int lineCount = 0;
+        String cisla = "0123456789";
+        for (String line : java.nio.file.Files.readAllLines(Paths.get("/home/jirka/src/java0/aoc23_01.txt"))) {
+            String cislaZRadku = "";
+            String dvojciferne = "";
+            lineCount++;
+
+            for (char c : line.toCharArray()) {
+                if (cisla.contains(String.valueOf(c))) {
+                    cislaZRadku += c;
+                }
+            }
+            dvojciferne += "" + cislaZRadku.charAt(0) + cislaZRadku.charAt(cislaZRadku.length()-1);
+            sum = sum + Integer.parseInt("" + cislaZRadku.charAt(0) + cislaZRadku.charAt(cislaZRadku.length()-1));
+            //System.out.println(lineCount + ". " + dvojciferne + " out of " + cislaZRadku);
+        }
+        System.out.println("Součet: " + sum);
+    }
     public static void main(String[] args) throws Exception {
         String fileName = "/home/jirka/src/java0/aoc23_01.txt";
         Scanner vstup = new Scanner(new File(fileName));
@@ -67,5 +91,6 @@ public class AoC202301CalibrationValues {
         }
         System.out.println("Part 1: sum of calibration values is " + calibration);
         System.out.println("Part 2: sum of calibration values is " + calibrationPart2);
+        saySolution();
     }
 }
