@@ -10,8 +10,8 @@ public class Zaklady11Mid {
         return false;
     }
     public static void main(String[] args) {
-        final String[] OVOCE = { "jablko", "hruška", "pomeranč", "jahoda", "banán", "kiwi", "malina"};
-        final String[] ZELENINA = { "zelí", "okurka", "rajče", "paprika", "ředkev", "mrkev", "brokolice" };
+        final String[] OVOCE = { "jablko", "hruška", "jahoda", "banán", "kiwi", "malina"};
+        final String[] ZELENINA = { "zelí", "okurka", "rajče", "ředkev", "mrkev", "brokolice" };
         Scanner sc = new Scanner(System.in, "utf8");
         int pocetSlov = 0;
         while (true) {

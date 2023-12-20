@@ -27,7 +27,6 @@ class KalkulackaTest {
 
         kalkulacka = new Kalkulacka(-13, -29);
         assertEquals(16, kalkulacka.odecti(), 0.00001);
-
     }
 
     @Test

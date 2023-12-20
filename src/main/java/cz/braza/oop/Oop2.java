@@ -19,10 +19,13 @@ class Clovicek {
     }
     public void skamaradit(String kamos) { kamarad = kamos;}
 
-
+/*
+    @Override
     public String toString() {
         return "Ahoj, já jsem " + jmeno + ", je mi " + vek + " let a můj kamarád je " + kamarad;
     }
+
+ */
     @Override
     public boolean equals(Object other) {
         if (other instanceof  Clovicek) {
@@ -35,6 +38,16 @@ class Clovicek {
     public static int getPocetLidi() { return pocetLidi; }
 
 }
+
+class Programator extends Clovicek {
+    public Programator(String jm, int v, String lang) {
+        super(jm, v);
+        jazyk = lang;
+    }
+    private String jazyk;
+    public String getJazyk() { return jazyk; }
+}
+
 class NakladniAuto {
     public static final int NOSNOST = 3000;
     private int naklad = 0;
@@ -127,7 +140,7 @@ public class Oop2 {
 
         /* ** OOP Mid - Nakladni auto
         NakladniAuto auto = new NakladniAuto();
-        auto.naloz(-20000);
+        auto.naloz(20000);
         auto.vyloz(6000);
         auto.naloz(500);
         auto.vyloz(300);
@@ -146,16 +159,23 @@ public class Oop2 {
         System.out.println(karel);
         System.out.println(cyril);
 */
-/*
+
         Clovicek karel = new Clovicek("Karel", 42);
+        karel = new Clovicek("Kája", 20);
+        karel = new Clovicek("Petr", 13);
+        System.out.println(Clovicek.getPocetLidi());
         //System.out.println(karel);
-        Clovicek inst2 = new Clovicek("Karel", 42);
-        System.out.println(karel == inst2);
-        System.out.println(karel.equals(inst2));
-        System.out.println(inst2.equals(inst2));
+
+        Clovicek josef = new Programator("Josef", 39, "Java");
+        if (josef instanceof Programator)
+            System.out.println( ((Programator)josef).getJazyk() );
+        System.out.println(karel);
+        //System.out.println(karel == inst2);
+        //System.out.println(karel.equals(inst2));
+        //System.out.println(inst2.equals(inst2));
         //karel = new Clovicek("Josef", 39);
         //karel = new Clovicek("Josef", 39);
-*/
+
         //System.out.println(Clovicek.getPocetLidi());
 
 
@@ -173,10 +193,12 @@ public class Oop2 {
         //vrana.vypis();
 
         //System.out.println(vrana);
-
+/*
         Kalkulacka k = new Kalkulacka(-15, 0);
         System.out.println(k.vydel());
         System.out.println(Kalkulacka.vydelCelociselne(15, 5));
         System.out.println(Kalkulacka.vydelCelociselne(15, 0));
+
+ */
     }
 }
