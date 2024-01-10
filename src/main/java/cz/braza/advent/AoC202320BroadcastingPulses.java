@@ -21,6 +21,17 @@ enum Type {
 }
 
 class Module {
+    String name;
+    Type type;
+    String[] destinations;
+
+
+}
+
+class FlipFlop extends Module {
+
+}
+class Conjunction extends Module {
 
 }
 public class AoC202320BroadcastingPulses {
