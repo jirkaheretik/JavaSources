@@ -1,6 +1,8 @@
 package cz.braza.educanet;
 
-final public class Frac {
+import java.io.Serializable;
+
+final public class Frac implements Comparable<Frac>, Cloneable, Serializable {
     private final int citatel;
     private final int jmenovatel;
     private int nsd(int a, int b) {
@@ -35,6 +37,8 @@ final public class Frac {
     public String toString() { return " " + citatel + "/" + jmenovatel; }
     public double toReal() { return (double) citatel / (double) jmenovatel; }
 
+    public static Frac of(int citatel, int jmenovatel) { return new Frac(citatel, jmenovatel); }
+
     public static void main(String[] args) {
         System.out.println(new Frac(12, 24));
         // 1 / ( 24/351 + 13/8)
@@ -57,5 +61,14 @@ final public class Frac {
         System.out.println("f1:f3 = " + (f1 == f3) + ", equals: " + f1.equals(f3));
         System.out.println("f3:f2 = " + (f3 == f2) + ", equals: " + f3.equals(f2));
         System.out.println((Object)f3);
+        System.out.println("----------------");
+        System.out.println(Frac.of(-2, -4));
+        System.out.println(Frac.of(-2, 4));
+        System.out.println(Frac.of(2, -4));
+    }
+
+    @Override
+    public int compareTo(Frac o) {
+        return citatel * o.jmenovatel - o.citatel * jmenovatel;
     }
 }
