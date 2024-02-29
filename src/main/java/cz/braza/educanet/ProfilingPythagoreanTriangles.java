@@ -1,29 +1,9 @@
 package cz.braza.educanet;
 
+import cz.braza.Timing;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
-import java.util.function.Supplier;
 
 public class ProfilingPythagoreanTriangles {
-    public static <R> R timing(Supplier<R> operation, int count) {
-        if (count < 1) count = 1; // sanity check
-        long sum = 0;
-        R result = null;
-        for (int i = 0; i < count; i++) {
-            long start = System.nanoTime();
-            result = operation.get();
-            long end = System.nanoTime();
-            long diff = TimeUnit.NANOSECONDS.toMillis(end - start);
-            sum += diff;
-            // System.out.printf("Execution took %dms\n", diff);
-        }
-        System.out.println("Run " + count + " times with avg execution time " + (sum / count) + "ms");
-        return result;
-    }
-
-    public static void timing(Runnable operation, int count) {
-        timing(() -> { operation.run(); return null; }, count);
-    }
 
     /**
      * Tři vnořené cykly, jedna velká podmínka.
@@ -91,12 +71,12 @@ public class ProfilingPythagoreanTriangles {
 
     public static void main(String[] args) {
         int REPEAT = 3;
-        timing(() -> findP1000v1(), REPEAT);
+        Timing.time(() -> findP1000v1(), REPEAT);
         System.out.println("------------------------------------------------");
-        timing(() -> findP1000vRnd(), REPEAT);
+        Timing.time(() -> findP1000vRnd(), REPEAT);
         System.out.println("------------------------------------------------");
-        timing(() -> findP1000v2(), REPEAT);
+        Timing.time(() -> findP1000v2(), REPEAT);
         System.out.println("------------------------------------------------");
-        timing(() -> findP1000v9(), REPEAT);
+        Timing.time(() -> findP1000v9(), REPEAT);
     }
 }
