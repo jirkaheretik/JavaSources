@@ -43,9 +43,23 @@ public class Zaklady13 {
         return result;
     }
 
+    public static String caesar(String text, int posun) {
+        String result = "";
+        int pozice = 0;
+        for (char c: text.toLowerCase().toCharArray()) {
+            int pos = (int)c + posun;
+            if (pos > 122) pos -= 26;
+            result += (char)pos;
+            pozice++;
+        }
+        return result;
+    }
+
+
     public static void main(String[] args) {
         // easyAscii();
         // middlePalindrom();
-        advVigener();
+        //advVigener();
+        System.out.println(caesar("TURECKO", 5));
     }
 }

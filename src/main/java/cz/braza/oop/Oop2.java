@@ -60,6 +60,8 @@ class NakladniAuto {
             naklad -= hmotnost;
     }
 
+    public int getNaklad() { return naklad; }
+
     public String toString() {
         return "V nákladním autě je naloženo " + naklad + " kg";
     }
@@ -78,6 +80,8 @@ class Kalkulacka {
     public double vydel() {
         if (druhe == 0)
             throw new ArithmeticException("Nulou dělit nelze!");
+
+
         return prvni / druhe;
     }
 
@@ -159,7 +163,7 @@ public class Oop2 {
         System.out.println(karel);
         System.out.println(cyril);
 */
-
+/*
         Clovicek karel = new Clovicek("Karel", 42);
         karel = new Clovicek("Kája", 20);
         karel = new Clovicek("Petr", 13);
@@ -193,12 +197,12 @@ public class Oop2 {
         //vrana.vypis();
 
         //System.out.println(vrana);
-/*
-        Kalkulacka k = new Kalkulacka(-15, 0);
-        System.out.println(k.vydel());
+
+        Kalkulacka k = new Kalkulacka(15, 0);
+        //System.out.println(k.vydel());
         System.out.println(Kalkulacka.vydelCelociselne(15, 5));
         System.out.println(Kalkulacka.vydelCelociselne(15, 0));
 
- */
+
     }
 }
