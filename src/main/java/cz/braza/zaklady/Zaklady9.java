@@ -24,6 +24,11 @@ public class Zaklady9 {
             System.out.println(lahve(i) + " stojí na stole a jedna láhev spadne");
     }
 
+    public static void shortLahve() {
+        for (int i = 10; i > 0; i--)
+            System.out.println((i > 4 ? i + " zelených láhví" : i > 1 ? i + " zelené láhve" : "1 zelená láhev" ) + " stojí na stole a jedna láhev spadne");
+    }
+
     public static void hard() {
         Scanner sc = new Scanner(System.in, "utf8");
         System.out.println("Zadejte levou mez 1. intervalu:");
@@ -44,6 +49,7 @@ public class Zaklady9 {
     public static void main(String[] args) {
 //        easy();
 //        middle();
-        hard();
+//        hard();
+        shortLahve();
     }
 }
