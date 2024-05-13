@@ -34,7 +34,7 @@ public class Skoleni {
 
 //         template();
 //         kalkulacka();
-        retezceUkol();
+        //retezceUkol();
 //        podminky();
         //nasobilka();
         //sachovnice();
@@ -62,11 +62,20 @@ public class Skoleni {
         dejMiDenVTydnu(4);*/
 
 
-        System.out.println(faktorial(8));
+       // System.out.println(faktorial(8));
+
+        // retezecPozpatku("Well, hello there!");
+        //ozvena("Jak je ti, Rakousko?");
+        System.out.println(fact(5));
+        //System.out.println(denVTydnu(7));
     }
 
-    private static int faktorial(int i) {
-        int faktorial = 1;
+    private static long fact(int vstup) {
+        return vstup < 2 ? 1 : vstup * fact(vstup - 1);
+    }
+
+    private static long faktorial(int i) {
+        long faktorial = 1;
         for (int n = 2; n <= i; n++)
             faktorial *= n;
         return faktorial;
@@ -76,8 +85,8 @@ public class Skoleni {
         System.out.println(DNY[i % DNY.length]);
     }
 
-    private static void denVTydnu(int den) {
-        System.out.println(DNY[den % DNY.length]);
+    private static String denVTydnu(int den) {
+        return DNY[den % DNY.length];
     }
 
     private static double prumer(String text) {
@@ -141,5 +150,19 @@ public class Skoleni {
 
     public static void novaFunkce() {
         System.out.println("Pokus");
+    }
+
+    public static void retezecPozpatku(String text) {
+        for (int i = 0; i < text.length(); i++)
+            System.out.print(text.charAt(text.length() - 1 - i));
+    }
+
+    public static void ozvena(String text, int pocet) {
+        for (int i = 0; i < pocet; i++)
+            System.out.println(text);
+    }
+
+    public static void ozvena(String text) {
+        ozvena(text, 3);
     }
 }
