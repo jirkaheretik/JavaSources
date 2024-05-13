@@ -3,9 +3,11 @@ package cz.braza.educanet;
 import java.util.*;
 
 public class Logik {
-    public static final String SYMBOLS = "0123456789";
+    //public static final String SYMBOLS = "0123456789";
+    public static final String SYMBOLS = "ABCDEFGHIJ";
     public static final int LENGTH = 4;
     public static final int MAX_LENGTH = 50;
+    public static final boolean CAN_REPEAT = false;
     public static final String BLACK_SYMBOL = "O";
     public static final String WHITE_SYMBOL = "o";
     public static final String LNG_ENTER_GUESS = "Zadejte váš pokus: ";
@@ -16,6 +18,14 @@ public class Logik {
     public static final String LNG_YES = "ano";
     public static final String LNG_SEE_YOU = "Program LOGIK se s vámi loučí a přeje vám hezký den!";
     public static final String LNG_POSSIBILITIES = "Počet zbývajících možností: ";
+    /* COMMANDS */
+    /**
+     * Commands that can be used instead of a guess to trigger a specific behavior, see "help" for the list of available commands
+     * help - list of commands
+     * count - show count of possible combinations
+     * show - show a random combination that passes all the previous checks
+     * list - list all the possible combinations
+     */
     public static final String CMD_LIST = "list"; // list all possibilities, given current history
     public static final String CMD_HELP = "help"; // show possible commands
     public static final String CMD_SHOW = "show"; // show me a valid move
@@ -24,15 +34,15 @@ public class Logik {
 
     private String myValue;
     private HashMap<String, Integer> history;
+    public static final Scanner sc = new Scanner(System.in);
 
     public Logik() {
-        myValue = generateValue(SYMBOLS, LENGTH, false);
+        myValue = generateValue(SYMBOLS, LENGTH, CAN_REPEAT);
         System.out.println(LNG_GAME_ON);
         history = new HashMap<>();
     }
 
-    public void doGame() {
-        Scanner sc = new Scanner(System.in);
+    public void playGame() {
         int result = 0;
         int guesses = 0;
         while (result < LENGTH * 2 * MAX_LENGTH) {
@@ -60,16 +70,29 @@ public class Logik {
         System.out.println(LNG_NUMBER_OF_TRIES + guesses);
     }
 
+    public List<String> getPossibilitiesNew() {
+        List<String> possibles = new ArrayList<>();
+        for (int pos = 0; pos < LENGTH; pos++) {
+
+
+        }
+
+        return possibles;
+    }
+
     public List<String> getPossibilities() {
         List<String> possibles = new ArrayList<>();
-        for (int a = 0; a < 10; a++) {
-            for (int b = 0; b < 10; b++) {
-                if (b == a) continue;
-                for (int c = 0; c < 10; c++) {
-                    if (c == a || c == b) continue;
-                    for (int d = 0; d < 10; d++) {
-                        if (d == a || d == b || d == c) continue;
-                        String guess = String.valueOf(a) + String.valueOf(b) + String.valueOf(c) + String.valueOf(d);
+        // TODO: currently works with 4 symbols only
+        // make it iterative, so that it generates another symbol until the length is satisfied.
+        // compareGuesses should work both ways and take minimum, so as to cope better with duplicates
+        for (int a = 0; a < SYMBOLS.length(); a++) {
+            for (int b = 0; b < SYMBOLS.length(); b++) {
+                if (!CAN_REPEAT && b == a) continue;
+                for (int c = 0; c < SYMBOLS.length(); c++) {
+                    if (!CAN_REPEAT && (c == a || c == b)) continue;
+                    for (int d = 0; d < SYMBOLS.length(); d++) {
+                        if (!CAN_REPEAT && (d == a || d == b || d == c)) continue;
+                        String guess = "" + SYMBOLS.charAt(a) + SYMBOLS.charAt(b) +SYMBOLS.charAt(c) +SYMBOLS.charAt(d);
                         boolean found = true;
                         for (String key: history.keySet()) {
                             int value = compareGuess(key, guess);
@@ -176,8 +199,7 @@ public class Logik {
         boolean goAgain = true;
         while (goAgain) {
             Logik l = new Logik();
-            l.doGame();
-            Scanner sc = new Scanner(System.in);
+            l.playGame();
             System.out.println(LNG_ANOTHER_GAME);
             goAgain = LNG_YES.equals(sc.nextLine().trim().toLowerCase());
         }
