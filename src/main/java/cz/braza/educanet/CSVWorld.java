@@ -12,6 +12,7 @@ class Country {
     int area;
     int population;
     long gdp;
+    public static final String AFFICES = " kMBTqQS";
 
     public Country(String n, String c, int a, int p, long g) {
         name = n;
@@ -23,7 +24,16 @@ class Country {
 
     @Override
     public String toString() {
-        return name + " (" + continent + "), " + area + " km2, " + population + " ppl and GDP: " + gdp;
+        return name + " (" + continent + "), " + area + " km2, " + format(population) + " ppl and GDP: " + format(gdp);
+    }
+
+    public static String format(double value) {
+        int index = 0;
+        while (value > 1000) {
+            value /= 1000;
+            index++;
+        }
+        return "" + (Math.round(value * 100.0) / 100.0) + AFFICES.charAt(index);
     }
 }
 
@@ -41,13 +51,13 @@ public class CSVWorld {
             }
             System.out.println("Data loaded. Countries: " + countries.size());
             System.out.println("Printing big countries:");
-            printBigCountries(countries, 230000000);
-            System.out.println();
+            printBigCountries(countries, 230_000_000);
             System.out.println("\nEurope area:");
             System.out.println(getSumOfContinentArea(countries, "Europe"));
             System.out.println("\nEurope population:");
-            System.out.println(getSumOfContinentPopulation(countries, "Europe"));
-            System.out.println(getAvgGdpForRichCountries(countries, 1_000_000_000_000L));
+            System.out.println(Country.format(getSumOfContinentPopulation(countries, "Europe")));
+            System.out.println("\nAverage GDP for trillion dollar economics:");
+            System.out.println(Country.format(getAvgGdpForRichCountries(countries, 1_000_000_000_000L)));
         }
         catch (IOException ioe) {
             ioe.printStackTrace();

@@ -46,6 +46,11 @@ public class PetiminutovkyKveten {
         return String.join(" ", slova);
     }
 
+    /**
+     * Funkce obrátí jednotlivá slova v řetězci
+     * @param text vstupní text k obrácení slov
+     * @return řetězec s obrácenými slovy
+     */
     public static String obratSlovo(String text) {
         String obracene = "";
         for (int idx = text.length() - 1; idx >= 0; idx--)
