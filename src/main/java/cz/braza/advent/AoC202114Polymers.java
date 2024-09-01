@@ -127,20 +127,6 @@ public class AoC202114Polymers {
         return uniques;
     }
 
-
-    /**
-     * Creates zeroes map with all the keys, given unique letters from a parameter
-     * @param uniques
-     * @return
-     */
-    private static Map<String, Long> createMap(String uniques) {
-        Map<String, Long> result = new HashMap<>();
-        for (char c: uniques.toCharArray())
-            for (char d: uniques.toCharArray())
-                result.put("" + c + d, 0L);
-        return result;
-    }
-
     /**
      * Finds target value, which is frequency of the mostly used letter reduced by frequency of the
      * least used letter
@@ -190,22 +176,22 @@ public class AoC202114Polymers {
             System.out.println(data[0]  + " polymerize by adding " + instrukce.get(data[0]) + " in the middle, thus forming new pairs " + data[0].charAt(0) + data[1] + " and " + data[1] + data[0].charAt(1));
         }
         // initial step:
-        Map<String, Long> polymer = createMap(uniques);
+        Map<String, Long> polymer = new HashMap<>();
         for (int i = 0; i < input.length() - 1; i++) {
             String key = "" + input.charAt(i) + input.charAt(i + 1);
-            polymer.put(key, polymer.get(key) + 1);
+            polymer.put(key, polymer.getOrDefault(key, 0L) + 1);
         }
         for (int i = 1; i <= 40; i++) {
             // make a step:
-            Map<String, Long> nextStep = createMap(uniques); // all zeroes:
+            Map<String, Long> nextStep = new HashMap<>();
             for (var entry : polymer.entrySet()) {
                 String key = entry.getKey();
                 long count = entry.getValue();
                 char middle = instrukce.get(key);
                 String k1 = "" + key.charAt(0) + middle;
                 String k2 = "" + middle + key.charAt(1);
-                nextStep.put(k1, nextStep.get(k1) + count);
-                nextStep.put(k2, nextStep.get(k2) + count);
+                nextStep.put(k1, nextStep.getOrDefault(k1, 0L) + count);
+                nextStep.put(k2, nextStep.getOrDefault(k2, 0L) + count);
             }
             polymer = nextStep;
             System.out.println("Step " + i + ". result: " + countValue(polymer, uniques, prvniZnak, posledniZnak));
