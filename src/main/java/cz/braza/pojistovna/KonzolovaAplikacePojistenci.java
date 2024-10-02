@@ -6,16 +6,35 @@ import java.util.Scanner;
 
 public class KonzolovaAplikacePojistenci {
     // private static final SeznamPojistencu evidence = new EvidenceCSV("/home/jirka/src/java0/pojistenci.dat");
-    // private static final SeznamPojistencu evidence = new Evidence();
-    private static final SeznamPojistencu evidence = new EvidenceMySQL();
+    private static final SeznamPojistencu evidence = new Evidence();
+    // private static final SeznamPojistencu evidence = new EvidenceMySQL();
     private static final Scanner sc = new Scanner(System.in);
     private static final int[] VOLBY_MENU = {1, 2, 3, 4, 9};
 
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_WHITE = "\u001B[37m";
+
+    public static final String ANSI_BLACK_BACKGROUND = "\u001B[40m";
+    public static final String ANSI_RED_BACKGROUND = "\u001B[41m";
+    public static final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
+    public static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
+    public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
+    public static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
+    public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
+    public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
+
     private static void zobrazNabidku() {
         System.out.println(
-                "Programátorská pojišťovna\n" +
-                        "=========================\n" +
-                        "V evidenci je: " + evidence.vratPocetZaznamu() + " záznamů\n" +
+                ANSI_PURPLE + "\nProgramátorská pojišťovna\n" +
+                        "=========================\n" + ANSI_RESET +
+                        "V evidenci je: " + ANSI_RED_BACKGROUND + ANSI_WHITE + evidence.vratPocetZaznamu() + " záznamů" + ANSI_RESET + "\n" +
                         "Vyberte si jednu z následujících akcí:\n" +
                         "1) Vypsat všechny pojištěnce\n" +
                         "2) Vkládání nových záznamů\n" +
