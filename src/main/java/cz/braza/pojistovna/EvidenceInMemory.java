@@ -6,9 +6,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Třída spravující data o pojištěncích
+ * Třída spravující data o pojištěncích. Pro uložení dat používá
+ * ArrayList, data jsou tedy uložena pouze v paměti.
+ * Pro potřeby persistence {@link EvidenceCSV} nebo {@link EvidenceMySQL}
  */
-public class Evidence implements SeznamPojistencu {
+public class EvidenceInMemory implements EvidenceService {
+    /**
+     * Seznam spravovaných záznamů (pojištěnců)
+     */
     private List<Pojistenec> pojistenci = new ArrayList<>();
 
     /**

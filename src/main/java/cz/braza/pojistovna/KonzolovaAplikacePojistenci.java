@@ -4,13 +4,52 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Scanner;
 
+/**
+ * Hlavní program celé aplikace, obsahuje metodu main (vstupní bod programu)
+ * a reprezentuje konzolovou aplikaci pro interakci s evidencí.
+ * Evidence je aktuálně napevno daná ve vlastnosti <b>evidence</b>, ale
+ * pouhou náhradou za jinou třídu lze dosáhnout jiného chování/ukládání dat.
+ *
+ * Projekt vznikal jako ukázkový a jako proof-of-concept vyučovaných pravidel
+ * v rámci školení <i>best practices</i>. Zároveň jsem byl zvědavý, kolik času
+ * něco takového může zabrat.
+ * <ul>
+ *     <li>Cca 20 minut třída s pojištěncem (základ)</li>
+ *     <li>Dalších 20 minut třída s evidencí</li>
+ *     <li>Pak asi hodinu, hodinu a čtvrt na samotnou konzolovou aplikaci, včetně toho, že jsem udělal rozhraní pro evidenci, aby ji bylo možné vyměnit.</li>
+ *     <li>Potom už šlo jen o rozšiřování dejme tomu hodinu na práci se soubory CSV nad stávajícím rámcem.</li>
+ *     <li>Databáze (MySQL) zabrala asi o trochu víc, když jsem potřeboval prošťouchnout, jak připojit knihovny, které potřebuju, atd.</li>
+ *     <li>Později už jen drobnosti, kompletování dokumentačních komentářů, přidání barviček apod.</li>
+ * </ul>
+ * Celkově se dá říci, že i v této podobě to je možné za odpoledne vytvořit.
+ */
 public class KonzolovaAplikacePojistenci {
-    // private static final SeznamPojistencu evidence = new EvidenceCSV("/home/jirka/src/java0/pojistenci.dat");
-    private static final SeznamPojistencu evidence = new Evidence();
-    // private static final SeznamPojistencu evidence = new EvidenceMySQL();
+    /**
+     * Základní implementace s uložením záznamů pouze v paměti
+     */
+    private static final EvidenceService evidence = new EvidenceInMemory();
+    /**
+     * Navazující implementace, která ukládá data do CSV souboru (zadávaného v konstruktoru)
+     */
+    // private static final EvidenceInterface evidence = new EvidenceCSV("/home/jirka/src/java0/pojistenci.dat");
+    /**
+     * Implementace evidence s využitím relační databáze
+     */
+    // private static final EvidenceInterface evidence = new EvidenceMySQL();
+    /**
+     * Scanner využívaný v naší aplikaci (vstupy od uživatele)
+     */
     private static final Scanner sc = new Scanner(System.in);
-    private static final int[] VOLBY_MENU = {1, 2, 3, 4, 9};
+    /**
+     * Povolené volby v nabídce (pro kontrolu uživatelských vstupů)
+     * POZOR, pro správnou funkčnost je třeba pole udržovat setříděné
+     * (v aplikaci není měněno)
+     */
+    public static final int[] VOLBY_MENU = {1, 2, 3, 4, 9};
 
+    /**
+     * Barevné konstanty pro barvení textu, experiment
+     */
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_BLACK = "\u001B[30m";
     public static final String ANSI_RED = "\u001B[31m";
@@ -21,6 +60,9 @@ public class KonzolovaAplikacePojistenci {
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
 
+    /**
+     * Barevné konstanty pro barvení pozadí textu
+     */
     public static final String ANSI_BLACK_BACKGROUND = "\u001B[40m";
     public static final String ANSI_RED_BACKGROUND = "\u001B[41m";
     public static final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
@@ -30,6 +72,10 @@ public class KonzolovaAplikacePojistenci {
     public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
     public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 
+    /**
+     * Metoda pro zobrazení nabídky. V případě přidávání položek
+     * je třeba též upravit {@link #VOLBY_MENU} a {@link #main}
+     */
     private static void zobrazNabidku() {
         System.out.println(
                 ANSI_PURPLE + "\nProgramátorská pojišťovna\n" +
@@ -44,6 +90,11 @@ public class KonzolovaAplikacePojistenci {
         );
     }
 
+    /**
+     * Hlavní program - smyčka obsluhující nabídku.
+     * Ke správné funkčnosti vyžaduje korektní obsah {@link #VOLBY_MENU}
+     * @param args
+     */
     public static void main(String[] args) {
         int volba = 0;
         while (volba != 9) {
@@ -62,20 +113,42 @@ public class KonzolovaAplikacePojistenci {
         System.out.println("Děkujeme za použití aplikace a přejeme příjemný den!");
     }
 
+    /**
+     * Zobrazení záznamů z evidence
+     */
     private static void zobrazZaznamy() {
         vypisPojistence(evidence.vyberVsechnyPojistence());
     }
 
+    /**
+     * Pomocná metoda používaná pro zobrazení promptu uživateli v případě,
+     * že již data zadával a máme je k dispozici, aby nemusel zadávat znovu
+     * @param txt Text, který bude opatřen závorkami, je-li neprázdný
+     * @return Výsledný řetězec (buď prázdný nebo s hranatými závorkami okolo)
+     */
     private static String ozavorkuj(String txt) {
         return txt.isEmpty() ? "" : " [" + txt + "]";
     }
 
+    /**
+     * Pomocná metoda pro zadávání vstupu
+     * @param vyzva Výzva pro uživatele (co se očekává k zadání)
+     * @param defVal Defaultní/počáteční hodnota, která se použije v případě, že uživatel zadá pouze prázdný řetězec
+     * @return Výsledná hodnota od uživatele (v případě neprázdného zadaného textu to bude ten, jinak defaultní hodnota)
+     */
     private static String getOrDefault(String vyzva, String defVal) {
         System.out.print(vyzva + ozavorkuj(defVal) + ": ");
         String result = sc.nextLine().trim();
         return result.isEmpty() ? defVal : result;
     }
 
+    /**
+     * Metoda pro zadávání údajů pro nového pojištěnce.
+     * Obsluhuje celé zadávání a počítá s tím, že může dojít k chybě
+     * (databázové nebo datové, pokud zadaná data odmítne třída {@link Pojistenec})
+     * V takovém případě umožní uživateli zadat data znovu, přičemž si zapamatuje
+     * data již dříve zadaná (stačí upravit ta, která nejsou zadána správně)
+     */
     private static void vlozPojistence() {
         System.out.println("Vkládání nových záznamů. Zadejte platné hodnoty jednotlivých údajů.");
         String jmeno = "";
@@ -111,6 +184,9 @@ public class KonzolovaAplikacePojistenci {
         }
     }
 
+    /**
+     * Vyhledávání uživatelů podle jména, příjmení a/nebo telefonního čísla
+     */
     private static void vyhledejTextove() {
         System.out.print("Vyhledávání dle textu. Zadejte jméno, příjmení nebo obojí (oddělené mezerou),\n lze zadat i jen začátek jména či příjmení, a systém zároveň podporuje vyhledávání dle telefonního čísla.\nVyhledávaný řetězec: ");
         String textKVyhledani = sc.nextLine().trim();
@@ -118,12 +194,22 @@ public class KonzolovaAplikacePojistenci {
         vypisPojistence(evidence.vyhledejPojistence(textKVyhledani));
     }
 
+    /**
+     * Vyhledávání uživatelů dle zadaného rozpětí věků
+     */
     private static void vyhledejDleVeku() {
         int min = nactiCisloNeboDefault("Vyhledávání pojištěnců dle věku (od-do).\nZadejte minimální věk (0): ", "Minimální věk nebyl určen.", 0);
         int max = nactiCisloNeboDefault("Zadejte maximální věk (MAX): ", "Maximální věk nebyl určen.", Integer.MAX_VALUE);
         vypisPojistence(evidence.vyhledejPojistenceDleVeku(min, max));
     }
 
+    /**
+     * Pomocná metoda pro zadání číselných vstupů
+     * @param vyzva Informace uživateli o očekávaném vstupu
+     * @param chybovaZprava Zpráva zobrazovaná po neplatném vstupu
+     * @param defaultVal Defaultní hodnota použitá v případě neplatného zadání
+     * @return Výsledná číselná hodnota
+     */
     private static int nactiCisloNeboDefault(String vyzva, String chybovaZprava, int defaultVal) {
         System.out.println(vyzva);
         String volba = sc.nextLine().trim();
@@ -137,6 +223,10 @@ public class KonzolovaAplikacePojistenci {
         return vysledek;
     }
 
+    /**
+     * Pomocná metoda pro samotné vypsání seznamu pojištěnců (získaného z různých metod, viz výše)
+     * @param seznam
+     */
     private static void vypisPojistence(Collection<Pojistenec> seznam) {
         if (seznam == null || seznam.isEmpty()) {
             System.out.println("Není k dispozici žádný záznam");

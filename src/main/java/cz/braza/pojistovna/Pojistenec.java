@@ -12,12 +12,30 @@ import java.time.Period;
  * nejsou uplatňována na datové úrovni.
  */
 public class Pojistenec {
+    /**
+     * Chybová zpráva (pro výjimku) v případě, že jméno nebo příjmení nejsou vyplněny
+     */
     public static final String ERR_EMPTY_STRING = "Řetězec nesmí být prázdný";
+    /**
+     * Chybová zpráva (pro výjimku) v případě, že věk nevyhovuje zadaným kritériím (0-150 let)
+     */
     public static final String ERR_WRONG_AGE = "Věk musí být nezáporné číslo do 150";
 
+    /**
+     * První (křestní) jméno pojištěnce, resp. všechna taková (mimo příjmení)
+     */
     private String jmeno;
+    /**
+     * Příjmení pojištěnce
+     */
     private String prijmeni;
+    /**
+     * Datum narození pojištěnce, v aplikaci může být též přibližně vypočítáno ze zadaného věku
+     */
     private LocalDate narozen;
+    /**
+     * Telefonní číslo pojištěnce (kontakt)
+     */
     private String telefon;
 
     /**

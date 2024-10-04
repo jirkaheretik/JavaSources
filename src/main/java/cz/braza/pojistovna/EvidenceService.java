@@ -2,7 +2,14 @@ package cz.braza.pojistovna;
 
 import java.util.Collection;
 
-public interface SeznamPojistencu {
+/**
+ * Rozhraní pro třídu/službu, která obstarává práci se seznamem záznamů (pojištěnců).
+ * Pro některé metody už toto rozhraní poskytuje defaultní implementaci, dostačující
+ * v běžných použitích. Protože se předpokládá, že některé implementující třídy
+ * budou potřebovat něco jako finalizér při ukončení práce s aplikací, je k tomu
+ * k dispozici metoda <b>ukonci()</b> včetně prázdné defaultní implementace.
+ */
+public interface EvidenceService {
     /**
      * Metoda přidává nového pojištěnce do seznamu
      * @param jmeno Jméno pojištěnce
@@ -40,6 +47,9 @@ public interface SeznamPojistencu {
 
     /**
      * Vyhledává všechny pojištěnce starší než zadaný věk (včetně)
+     * Standardní implementace (nejspíš nebude potřeba nikde překrývat)
+     * využívá definovanou funkci {@link #vyhledejPojistenceDleVeku}
+     * s maximem nastaveným na Integer.MAX_VALUE
      * @param min Minimální věk pojištěnce
      * @return Seznam pojištěnců dle vyhledávacích kritérií
      */
@@ -49,6 +59,9 @@ public interface SeznamPojistencu {
 
     /**
      * Vyhledává všechny pojištěnce do zadaného věku (včetně)
+     * Standardní implementace (nejspíš nebude potřeba nikde překrývat)
+     * využívá definovanou funkci {@link #vyhledejPojistenceDleVeku}
+     * s minimem nastaveným na hodnotu 0
      * @param max Maximální věk pojištěnce
      * @return Seznam pojištěnců dle vyhledávacích kritérií
      */
@@ -64,7 +77,8 @@ public interface SeznamPojistencu {
 
     /**
      * Ukončení práce s evidencí (úklid)
-     * Prázdná implementace dostačující pro řadu implementací
+     * Prázdná implementace dostačující pro řadu implementací.
+     * Nahrazuje destruktor/finalizér.
      */
     default void ukonci() {}
 }

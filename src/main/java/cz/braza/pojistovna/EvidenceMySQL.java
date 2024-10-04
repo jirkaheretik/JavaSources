@@ -5,17 +5,58 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class EvidenceMySQL implements SeznamPojistencu {
+/**
+ * Evidence pojištěnců využívající pro uložení dat databázi MySQL/MariaDB.
+ * Implementuje rozhraní @see EvidenceInterface
+ */
+public class EvidenceMySQL implements EvidenceService {
+    /**
+     * Konstanta pro jméno databáze používané při připojování
+     */
+    private static final String DB_NAME = "pojistenci";
+    /**
+     * Konstanta pro uživatelské jméno používané při připojování
+     */
+    private static final String USER_NAME = "root";
+    /**
+     * Konstanta pro heslo uživatele používané při připojování
+     */
+    private static final String USER_PASS = "root";
+    /**
+     * Kompletní připojovací řetězec využívající jednotlivé konstanty pro db, uživatele a heslo
+     */
+    private static final String CONNECTION_STRING = "jdbc:mysql://localhost/" + DB_NAME + "?user=" + USER_NAME + "&password=" + USER_PASS + "&serverTimezone=Europe/Rome";
+    /**
+     * Spojení k DB nastavované v konstruktoru
+     */
     private Connection spojeni;
+    /**
+     * Informace, zda spojení k db funguje
+     */
     private boolean spojeno = false;
+    /**
+     * Předpřipravený dotaz pro hledání dle jména, příjmení a telefonního čísla
+     */
     private PreparedStatement hledani;
-    private PreparedStatement pridani;
+    /**
+     * Předpřipravený dotaz pro hledání dle rozmezí věku
+     */
     private PreparedStatement hledaniVek;
+    /**
+     * Předpřipravený dotaz pro přidávání nových záznamů
+     */
+    private PreparedStatement pridani;
 
+    /**
+     * Konstruktor, pokusí se vytvořit a nastavit připojení,
+     * v dalších metodách už se funkční spojení předpokládá
+     * (řešení chyb zatím není)
+     * V rámci instanciace zároveň vytváří a nastavuje do vlastností
+     * třídy předpřipravené dotazy pro usnadnění pozdější práce
+     */
     public EvidenceMySQL() {
         try {
-            spojeni = DriverManager.getConnection("jdbc:mysql://localhost/pojistenci?user=root&password=root&serverTimezone=Europe/Rome");
-            System.out.println("Spojení navázáno");
+            spojeni = DriverManager.getConnection(CONNECTION_STRING);
             spojeno = true;
             hledani = spojeni.prepareStatement("select * from pojistenec where jmeno like ? or prijmeni like ? or telefon like ?");
             hledaniVek = spojeni.prepareStatement("select * from pojistenec where vek >= ? and vek <= ?");
@@ -25,6 +66,14 @@ public class EvidenceMySQL implements SeznamPojistencu {
         }
     }
 
+    /**
+     * Přidává nový záznam o pojištěnci.
+     * Přebaluje případnou SQL výjimku na RuntimeException
+     * @param jmeno Jméno pojištěnce
+     * @param prijmeni Příjmení pojištěnce
+     * @param vek Věk pojištěnce
+     * @param telefon Telefonní číslo pojištěnce
+     */
     @Override
     public void pridejPojistence(String jmeno, String prijmeni, int vek, String telefon) {
         try {
@@ -38,6 +87,13 @@ public class EvidenceMySQL implements SeznamPojistencu {
         }
     }
 
+    /**
+     * Soukromá metoda, která z různých dotazů (již dovyplněných PreparedStatements)
+     * posbírá data do listu, který vrací.
+     * Přebaluje SQL chyby na RuntimeException
+     * @param pst Předpřipravený dotaz, který se použije pro získávání záznamů
+     * @return Seznam pojištěnců vyhovujících zadanému dotazu
+     */
     private Collection<Pojistenec> posbirejPojistenceZDotazu(PreparedStatement pst) {
         List<Pojistenec> vysledek = new ArrayList<>();
         try {
@@ -53,6 +109,10 @@ public class EvidenceMySQL implements SeznamPojistencu {
         return vysledek;
     }
 
+    /**
+     * Metoda vrací všechny pojištěnce v databázi
+     * @return Seznam všech pojištěnců
+     */
     @Override
     public Collection<Pojistenec> vyberVsechnyPojistence() {
         try {
@@ -63,6 +123,11 @@ public class EvidenceMySQL implements SeznamPojistencu {
         return null;
     }
 
+    /**
+     * Metoda vyhledává pojištěnce dle jména, příjmení nebo části telefonního čísla
+     * @param text Text k vyhledání
+     * @return Seznam pojištěnců vyhovujících dotazu
+     */
     @Override
     public Collection<Pojistenec> vyhledejPojistence(String text) {
         try {
@@ -76,6 +141,12 @@ public class EvidenceMySQL implements SeznamPojistencu {
         return null;
     }
 
+    /**
+     * Vyhledávání pojištěnců dle věku (minimum a maximum, obojí včetně)
+     * @param min Minimální věk pojištěnce
+     * @param max Maximální věk pojištěnce
+     * @return Seznam pojištěnců vyhovujících zadaným podmínkám.
+     */
     @Override
     public Collection<Pojistenec> vyhledejPojistenceDleVeku(int min, int max) {
         try {
@@ -88,6 +159,10 @@ public class EvidenceMySQL implements SeznamPojistencu {
         return null;
     }
 
+    /**
+     * Vrací počet záznamů v databázi
+     * @return Počet pojištěnců v tabulce
+     */
     @Override
     public int vratPocetZaznamu() {
         int pocetZaznamu = 0;
