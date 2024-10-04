@@ -1,7 +1,5 @@
 package cz.braza.oop;
 
-import org.junit.Assert;
-
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 class KalkulackaTest {
