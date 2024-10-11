@@ -27,15 +27,15 @@ public class KonzolovaAplikacePojistenci {
     /**
      * Základní implementace s uložením záznamů pouze v paměti
      */
-    private static final EvidenceService evidence = new EvidenceInMemory();
+    //private static final EvidenceService evidence = new EvidenceVPameti();
     /**
      * Navazující implementace, která ukládá data do CSV souboru (zadávaného v konstruktoru)
      */
-    // private static final EvidenceInterface evidence = new EvidenceCSV("/home/jirka/src/java0/pojistenci.dat");
+    private static final EvidenceService evidence = new EvidenceCSV("/home/jirka/src/java0/pojistenci.dat");
     /**
      * Implementace evidence s využitím relační databáze
      */
-    // private static final EvidenceInterface evidence = new EvidenceMySQL();
+    // private static final EvidenceService evidence = new EvidenceMySQL();
     /**
      * Scanner využívaný v naší aplikaci (vstupy od uživatele)
      */

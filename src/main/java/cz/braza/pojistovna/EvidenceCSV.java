@@ -7,11 +7,11 @@ import java.nio.file.StandardOpenOption;
 import java.util.Scanner;
 
 /**
- * Evidence pojištěnců na bázi CSV souborů. Pouze <b>rozšiřuje</b> třídu {@link EvidenceInMemory}
+ * Evidence pojištěnců na bázi CSV souborů. Pouze <b>rozšiřuje</b> třídu {@link EvidenceVPameti}
  * o schopnost načítat data (na začátku, tedy při vytváření instance) a ukládat data při korektním
  * ukončení aplikace. Díky tomu není třeba soubor neustále otevérat a zavírat s každou operací.
  */
-public class EvidenceCSV extends EvidenceInMemory {
+public class EvidenceCSV extends EvidenceVPameti {
     /**
      * Objekt File odkazující na vstupní a výstupní datový soubor (CSV)
      */
@@ -19,7 +19,7 @@ public class EvidenceCSV extends EvidenceInMemory {
     /**
      * CSV určuje jako defaultní oddělovač čárku, ta bude použita, není-li v konstruktoru řečeno jinak
      */
-    private static final String DEF_ODDELOVAC = ",";
+    public static final String DEF_ODDELOVAC = ",";
     /**
      * Oddělovač, který používáme pro oddělení jedotlivých záznamů, možno zadat v konstruktoru
      */
@@ -66,8 +66,9 @@ public class EvidenceCSV extends EvidenceInMemory {
      * @param file Soubor pro čtení záznamů o pojištěncích
      */
     private void loadFile(File file) {
+        Scanner vstup = null;
         try {
-            Scanner vstup = new Scanner(file);
+            vstup = new Scanner(file);
             while (vstup.hasNextLine()) {
                 String[] data = vstup.nextLine().trim().split(oddelovac);
                 try {
@@ -77,6 +78,9 @@ public class EvidenceCSV extends EvidenceInMemory {
             }
         } catch (IOException ioe) {
             System.err.println(ioe.getMessage());
+        } finally {
+            if (vstup != null)
+                vstup.close();
         }
     }
 }

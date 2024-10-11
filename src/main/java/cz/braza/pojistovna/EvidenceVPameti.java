@@ -10,7 +10,7 @@ import java.util.List;
  * ArrayList, data jsou tedy uložena pouze v paměti.
  * Pro potřeby persistence {@link EvidenceCSV} nebo {@link EvidenceMySQL}
  */
-public class EvidenceInMemory implements EvidenceService {
+public class EvidenceVPameti implements EvidenceService {
     /**
      * Seznam spravovaných záznamů (pojištěnců)
      */
