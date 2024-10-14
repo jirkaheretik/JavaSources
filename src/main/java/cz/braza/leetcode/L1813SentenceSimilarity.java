@@ -48,15 +48,11 @@ public class L1813SentenceSimilarity {
     public static boolean areSentencesSimilar(String sentence1, String sentence2) {
         String[] shorter = sentence1.split(" ");
         String[] longer = sentence2.split(" ");
-        // found last common index from the start:
-        int startIndex = 0;
+        int startIndex = 0, endIndex = 0;
         while (startIndex < shorter.length && startIndex < longer.length && shorter[startIndex].equals(longer[startIndex]))
             startIndex++;
-        int endIndex = 0;
         while (endIndex < shorter.length && endIndex < longer.length && shorter[shorter.length - 1 - endIndex].equals(longer[longer.length - 1 - endIndex]))
             endIndex++;
-        //System.out.println("End of processing");
-        //System.out.println("S1 length: " + shorter.length + ", S2 length: " + longer.length + ", sum: " + (startIndex + endIndex));
         return (startIndex + endIndex >= shorter.length || startIndex + endIndex >= longer.length);
     }
 
