@@ -1,5 +1,8 @@
 package cz.braza.leetcode;
 
+import java.util.Deque;
+import java.util.LinkedList;
+
 public class L20ValidParenthesis {
     public static final int STRLIMIT = 10000;
     public static final int STACKLIMIT = STRLIMIT / 2;
@@ -18,11 +21,33 @@ public class L20ValidParenthesis {
                 case ')':
                 case ']':
                 case '}':
-                    char expected = c == ')' ? '(' : c == ']' ? '[' : '{';
-                    if (stackPos == 0 || stack[--stackPos] != expected) return false;
+                    // if empty stack or last open bracket is not matching, bail out quickly
+                    if (stackPos == 0 || stack[--stackPos] != (c == ')' ? '(' : c == ']' ? '[' : '{')) return false;
             }
         }
         return stackPos == 0;
+    }
+
+    public boolean isValidTomasUpraveny(String s) {
+        int delka = s.length();
+        if (delka % 2 != 0) return false;
+        Deque<Character> zasobnik = new LinkedList<>();
+        int pocetUzaviracich = 0;
+        for (int i = 0; i < delka; i++) {
+            char znak = s.charAt(i);
+            if (znak == '(' || znak == '[' || znak == '{')
+                zasobnik.push(znak);
+            else {
+                pocetUzaviracich++;
+                if (zasobnik.isEmpty()) return false;
+                String toPop = "" + zasobnik.pop() + znak;
+                if (toPop.equals("()") || toPop.equals("[]") || toPop.equals("{}"))
+                    pocetUzaviracich--;
+                else return false;
+            }
+
+        }
+        return zasobnik.size() == 0 && pocetUzaviracich == 0;
     }
 
     public static void main(String[] args) {

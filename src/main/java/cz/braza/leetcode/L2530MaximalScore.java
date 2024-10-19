@@ -40,14 +40,10 @@ public class L2530MaximalScore {
         for(int x : nums)
             pq.offer(x);
         long score = 0;
-        while(!pq.isEmpty() && k > 0) {
+        while(!pq.isEmpty() && k-- > 0) {
             int val = pq.poll();
             score += val;
-            int x = val / 3;
-            if (x * 3 < val)
-                x++;
-            pq.add(x);
-            k--;
+            pq.add((int) Math.ceil(val / 3.0));
         }
         return score;
     }
