@@ -8,7 +8,7 @@ import java.util.List;
 public class AoC202314BoulderMirrors {
     public static void main(String[] args) throws Exception {
         String fileName = "/home/jirka/src/java0/aoc23_14.txt";
-        final int BOXSIZE = 140;
+        final int BOXSIZE = 100;
         char[][] field = AOCHelper.readFile2CharArray(fileName);
         // just for debugging:
         // DBG: printFrequencies(field);

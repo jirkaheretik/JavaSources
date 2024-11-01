@@ -43,7 +43,7 @@ public class AoC202316ReflectingBeams {
                 int x = Integer.parseInt(beam[0]);
                 int y = Integer.parseInt(beam[1]);
                 char direction = beam[2].charAt(0);
-                System.out.println("Processing beam at [" + x + "," + y + "] direction " + direction);
+                //System.out.println("Processing beam at [" + x + "," + y + "] direction " + direction);
                 int steps = 0;
                 while (true) {
                     //System.out.println("DBG: " + x + "-" + y + "-" + direction);
@@ -130,7 +130,7 @@ public class AoC202316ReflectingBeams {
                     }
                 }
             }
-            System.out.println("Beams size: " + beams.size());
+            //System.out.println("Beams size: " + beams.size());
             int countEnergized = 0;
             for (int row = 0; row < energized.length; row++)
                 for (int col = 0; col < energized[row].length; col++)
