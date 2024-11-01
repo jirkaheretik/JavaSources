@@ -26,7 +26,7 @@ public class Zaklady9 {
 
     public static void shortLahve() {
         for (int i = 10; i > 0; i--)
-            System.out.println((i > 4 ? i + " zelených láhví" : i > 1 ? i + " zelené láhve" : "1 zelená láhev" ) + " stojí na stole a jedna láhev spadne");
+            System.out.println(i + (i > 4 ? " zelených láhví" : i > 1 ? " zelené láhve" : " zelená láhev" ) + " stojí na stole a jedna láhev spadne");
     }
 
     public static void hard() {
