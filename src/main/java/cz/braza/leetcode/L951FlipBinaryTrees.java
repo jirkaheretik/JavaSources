@@ -21,14 +21,21 @@ public class L951FlipBinaryTrees {
     - same values in same level
     - even same values in children (left/right is only thing we can flip)
      */
-    public boolean flipEquiv(TreeNode root1, TreeNode root2) {
+    public boolean flipEquivFirst(TreeNode root1, TreeNode root2) {
         if (root1 == null) return root2 == null;
         if (root2 == null) return false; // root1 is not null
         // now both are valid nodes
         if (root1.val != root2.val) return false;
 
-        return (flipEquiv(root1.left, root2.left) && flipEquiv(root1.right, root2.right))
+        return (flipEquivFirst(root1.left, root2.left) && flipEquivFirst(root1.right, root2.right))
                 ||
-               (flipEquiv(root1.left, root2.right) && flipEquiv(root1.right, root2.left));
+               (flipEquivFirst(root1.left, root2.right) && flipEquivFirst(root1.right, root2.left));
+    }
+
+    /*
+    Rewritten to a single return statement, with no conditional operators
+     */
+    public boolean flipEquiv(TreeNode root1, TreeNode root2) {
+        return root1 == null && root2 == null || (root1 != null && root2 != null && root1.val == root2.val && ((flipEquiv(root1.left, root2.left) && flipEquiv(root1.right, root2.right)) || (flipEquiv(root1.left, root2.right) && flipEquiv(root1.right, root2.left))));
     }
 }

@@ -32,11 +32,28 @@ Output: true
 
  */
 public class L877StoneGame {
+    /*
+    Intuition:
+    create NxN array of ints, N is piles.size
+    For any i <= j, a[i][j] is how many can the player get from interval <i; j>
+    For i <> j, a[j][i] is then 2nd prize
+    Thus:
+    a[i][j]+a[j][i] is sum piles[i..j]
+    a[i][i] == piles[i]
+    if a[0][size]>a[size][0] return true
+    For any m-n, one can take piles[m] plus 2nd prize of <m + 1, n>, or piles[n] and 2nd prize of <m, n - 1>
+    Dynamic programming will solve the rest.
+     */
     public boolean stoneGame(int[] piles) {
-        return true;
+        int[][] matrix = new int[piles.length][piles.length];
+        int maxFirstCanGet = miniMax(piles, matrix, 0, piles.length - 1);
+        // previous line should populate whole DP array `matrix`
+        return maxFirstCanGet > matrix[piles.length - 1][0];
     }
 
-    public static int miniMax(int[] piles, int minIndex, int maxIndex) {
+    public static int miniMax(int[] piles, int[][] dp, int minIndex, int maxIndex) {
+        if (minIndex >= maxIndex) return piles[minIndex];
+        int returnVal = Math.max(piles[minIndex] + dp[minIndex][maxIndex], piles[maxIndex]);
         return 0;
     }
 }
