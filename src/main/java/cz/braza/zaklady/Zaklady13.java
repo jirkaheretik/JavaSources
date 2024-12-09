@@ -101,9 +101,9 @@ public class Zaklady13 {
 
     public static void main(String[] args) {
         // easyAscii();
-        // middlePalindrom();
+        middlePalindrom();
         //advVigener();
-        piTest();
+        // piTest();
         //System.out.println(caesar("TURECKO", 5));
     }
 }

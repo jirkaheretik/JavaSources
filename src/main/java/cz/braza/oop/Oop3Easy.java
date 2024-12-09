@@ -1,11 +1,11 @@
 package cz.braza.oop;
 
-class OClovek {
+class Clovek {
     String jmeno;
     int vek;
-    int unava = 0;
+    double unava = 0;
 
-    public OClovek(String jm, int v) {
+    public Clovek(String jm, int v) {
         jmeno = jm;
         vek = v;
     }
@@ -30,7 +30,7 @@ class OClovek {
 }
 public class Oop3Easy {
     public static void main(String[] args) {
-        OClovek karel = new OClovek("Karel Nový", 25);
+        Clovek karel = new Clovek("Karel Nový", 25);
         System.out.println(karel);
         for (int i = 0; i < 3; i++)
             karel.behej(10);
