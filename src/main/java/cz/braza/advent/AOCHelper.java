@@ -3,6 +3,7 @@ package cz.braza.advent;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,43 @@ public class AOCHelper {
             int lineNum = 0;
             for (String line: lines)
                 field[lineNum++] = line.toCharArray();
+            return field;
+        }
+        catch (IOException ioe) {
+            System.out.println("IOException when reading " + filename);
+            return null;
+        }
+    }
+
+    public static char[][] readFile2CharArrayWithBorder(String filename, char border) {
+        char[][] field = readFile2CharArray(filename);
+        char[][] result = new char[field.length + 2][field[0].length + 2];
+        Arrays.fill(result[0], border);
+        Arrays.fill(result[result.length - 1], border);
+        for (int i = 0; i < field.length; i++) {
+            Arrays.fill(result[i + 1], border);
+            System.arraycopy(field[i], 0, result[i + 1], 1, field[i].length);
+        }
+        return result;
+    }
+
+    /**
+     * Reads filename and returns the content as a two dimensional array of ints
+     * @param filename
+     * @return
+     */
+    public static int[][] readFile2DigitArray(String filename) {
+        try {
+            List<String> lines = Files.readAllLines(Paths.get(filename));
+            // convert to an array:
+            int[][] field = new int[lines.size()][lines.get(0).length()];
+            int lineNum = 0;
+            for (String line: lines) {
+                char[] chars = line.toCharArray();
+                for (int i = 0; i < chars.length; i++)
+                    field[lineNum][i] = Integer.parseInt("" + chars[i]);
+                lineNum++;
+            }
             return field;
         }
         catch (IOException ioe) {
