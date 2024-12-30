@@ -25,7 +25,7 @@ public class Day20RaceConditionMaze {
     public static final int[][] DIRECTIONS = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
     public static final int SIZE = 150;
     public static void main(String[] args) {
-        String fileName = "/home/jirka/src/java0/aoc24_20.txt";
+        String fileName = "/home/jirka/src/java0/aoc24_20up.txt";
         char[][] map = AOCHelper.readFile2CharArray(fileName);
         int[][] FROMSTART = new int[map.length][map[0].length];
         int[][] TOEND = new int[map.length][map[0].length];
@@ -36,7 +36,7 @@ public class Day20RaceConditionMaze {
         int[][] tst = {{1, 1}, {2, 2}, {7, 7}, {23, 11}};
         for (int[] coord: tst)
             System.out.printf("DBG For pos [%d,%d] '%c' length from start is %d and %d to the end.%n", coord[0], coord[1], map[coord[0]][coord[1]], FROMSTART[coord[0]][coord[1]], TOEND[coord[0]][coord[1]]);
-        int LIMIT = 100;
+        int LIMIT = 30;
         System.out.println("Classic path is " + LENGTH + " steps (picoseconds) long.");
         long endTime = System.currentTimeMillis();
         /*
