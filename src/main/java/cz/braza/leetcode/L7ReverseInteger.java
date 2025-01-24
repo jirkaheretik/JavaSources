@@ -41,7 +41,7 @@ public class L7ReverseInteger {
             x *= -1;
         }
         if (x == 0) return 0;
-        int[] digits = new int[Math.log10(x) + 1];
+        int[] digits = new int[(int)Math.log10(x) + 1];
         int idx = digits.length - 1;
         while (x > 0) {
             digits[idx--] = x % 10;
