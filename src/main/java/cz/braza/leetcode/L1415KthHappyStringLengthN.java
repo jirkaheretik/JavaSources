@@ -63,7 +63,7 @@ public class L1415KthHappyStringLengthN {
     - next we alternate lower/upper, since we cannot use the same char
     - but NOTE whether we go up or down depends on the letter, not just number
 
-    Runs 1ms, beats 96.9%, 345 testcases
+    Runs 1ms, beats 96.9%, 345 testcases (update 19.2.2025 when it is daily - beating 99.1% now :-)
      */
     public static String getHappyString(int n, int k) {
         k--; // to make it zero based
