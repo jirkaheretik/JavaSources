@@ -3,7 +3,9 @@ package cz.braza.leetcode;
 import java.util.stream.IntStream;
 
 /*
-2226. Maximum Candies Allocated to K Children
++ Daily 14.3.2025
+2226. Maximum Candies Allocated to K Children https://leetcode.com/problems/maximum-candies-allocated-to-k-children/
+SHOW: binary search, progress, inlining a function
 Medium
 Topics
 Companies
@@ -63,4 +65,34 @@ public class L2226MaxNumberOfCandiesForChildren {
             count += pile / c;
         return count;
     }
+
+    /*
+    Inlined for better performance, tweaked the binary search logic a small bit
+    Runs 19ms, beats 94.4%, 100 testcases
+
+    Then converted to int for the bounds, and check for size of maxPile, as this is a good upper bound too.
+    Runs 10ms, beats 100%
+     */
+    public int maximumCandiesInlined(int[] candies, long k) {
+        // 1. get total number of candies
+        int maxPile = 0;
+        long candiesCount = 0;
+        for (int pile: candies) {
+            if (pile > maxPile) maxPile = pile;
+            candiesCount += pile;
+        }
+        if (candiesCount < k) return 0; // not enough candies for all the children
+        int upperBound = (int) (candiesCount / k);
+        if (maxPile < upperBound) upperBound = maxPile;
+        int lowerBound = 1;
+        while (lowerBound < upperBound) {
+            int mid = (upperBound + lowerBound + 1) / 2;
+            long currCount = 0;
+            for (int pile: candies) currCount += pile / mid;
+            if (currCount >= k) lowerBound = mid;
+            else upperBound = mid - 1;
+        }
+        return lowerBound;
+    }
+
 }
