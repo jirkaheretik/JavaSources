@@ -77,6 +77,18 @@ public class L1863SubsetXorTotal {
         return totalSum;
     }
 
+    /*
+    Daily 5.4., taken from editorial.
+    Each bit that is set in any of the numbers will be in the result 2^(n-1) times (half the cases). If that bit is nowhere set, it wont be there at all.
+    That means we gather all the set bits (by ORing all the numbers) and then shift it to the left N-1 times. All done in O(n).
+    Runs 0ms, beats 100%, 48 testcases.
+    */
+    public static int subsetXORSumEditorial(int[] nums) {
+        int result = 0;
+        for (int num: nums) result |= num;
+        return result << (nums.length - 1);
+    }
+
     public static void main(String[] args) {
         int[] toTest = {5, 1, 6};
         System.out.println(subsetXORSum(toTest));
