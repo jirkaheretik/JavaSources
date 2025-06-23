@@ -1,7 +1,6 @@
 package cz.braza.educanet;
 
 import cz.braza.EratosthenesSieve;
-import org.openqa.selenium.json.JsonOutput;
 
 public class Functions {
     /**
