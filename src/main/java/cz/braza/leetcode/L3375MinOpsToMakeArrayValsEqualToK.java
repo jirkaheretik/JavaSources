@@ -1,6 +1,8 @@
 package cz.braza.leetcode;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /*
 3375. Minimum Operations to Make Array Values Equal to K
@@ -98,7 +100,7 @@ public class L3375MinOpsToMakeArrayValsEqualToK {
     Much cleaner now, count skips (aka different elements), in the end update whether min == k or not.
     Runs 3ms, beats 78.2% again, no change.
      */
-    public int minOperationsSimplified(int[] nums, int k) {
+    public static int minOperationsSimplified(int[] nums, int k) {
         Arrays.sort(nums);
         if (nums[0] < k) return -1;
         int currentIdx = nums.length - 1;
@@ -108,5 +110,43 @@ public class L3375MinOpsToMakeArrayValsEqualToK {
             if (nums[currentIdx] != nums[--currentIdx])
                 count++;
         return nums[0] == k ? count : count + 1;
+    }
+
+    /*
+    From Editorial, daily problem 9.4.2025
+    Make a set, fill in numbers greater than k, return its size
+    Runs 2ms, beats 82.7%, 969 testcases
+     */
+    public static int minOperationsSet(int[] nums, int k) {
+        Set<Integer> st = new HashSet<>();
+        for (int x: nums)
+            if (x < k) return -1;
+            else if (x > k) st.add(x);
+        return st.size();
+    }
+
+    /*
+    Same idea as before, but instead of Set we create array of booleans to mark numbers
+    we have seen already. Count result during the process.
+    Runs 1ms, beats 100%
+     */
+    public static int minOperationsArr(int[] nums, int k) {
+        boolean[] seen = new boolean[101];
+        int result = 0;
+        for (int x: nums)
+            if (x < k) return -1;
+            else if (x > k && !seen[x]) {
+                seen[x] = true;
+                result++;
+            }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int[] t1 = {9, 7, 5, 3};
+        System.out.println(minOperationsSimplified(t1, 3));
+        System.out.println(minOperationsSimplified(t1, 2));
+        System.out.println(minOperationsSet(t1, 3));
+        System.out.println(minOperationsSet(t1, 2));
     }
 }

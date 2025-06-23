@@ -81,4 +81,27 @@ public class L416PartitionEqualSubsetSum {
             }
         return dp[targetSum];
     }
+
+    /*
+    Update from previous, this time I reworked the conditions and cycles so we
+    need not to evaluate the end in every cycle. Also, if we do not return true in the inner cycle,
+    we cannot reach it, so return false in the end. This also means I do not need
+    dp[targetsum], so we can easily make it of size targetsum instead of targetsum+1
+    Runs 12ms, beats 97.4%
+     */
+    public boolean canPartitionDpBetter(int[] nums) {
+        int totalSum = 0;
+        for (int num : nums) totalSum += num;
+        if (totalSum % 2 != 0) return false;
+        int targetSum = totalSum / 2;
+        boolean[] dp = new boolean[targetSum];
+        dp[0] = true;
+        for (int num : nums)
+            if (num > targetSum) return false; // if a single number is bigger than half, I cannot make half of the rest, right?
+            else if (dp[targetSum - num]) return true; // by adding this number we complete half, no need to go any further
+            else for (int currSum = targetSum - 1; currSum >= num; currSum--)
+                    // if we cannot reach this number yet, but can by adding current number, mark it so
+                    if (!dp[currSum] && dp[currSum - num]) dp[currSum] = true;
+        return false;
+    }
 }
